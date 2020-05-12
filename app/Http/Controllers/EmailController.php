@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\UpdateRequestEmail;
 use App\Note;
+use App\Repositories\EmailsInterface;
+
 
 class EmailController extends Controller
 {
@@ -14,24 +16,22 @@ class EmailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $email;
 
-    public function __construct()
+    public function __construct(EmailsInterface $email)
     {
+ 
+        $this->email = $email;
         $this->middleware('auth');
         $this->middleware('roles:admin');
     }
 
     public function index()
     {
-        
-        $key = 'emails.all.'. request('page', 1); //por default si no hay valor la pagina sera 1
-        
-        $emails = Cache::rememberForever($key, function(){
-           return Email::with(['user', 'note', 'tags'])
-                    ->orderBy('created_at', request('sorted', 'desc'))
-                    ->paginate(10);
-                
-        });
+        // Cache::tags('emails')->flush();
+        // die();
+        $emails = $this->email->getPaginated();
+     
             
         return view('emails.index',compact('emails'));
    }
@@ -76,12 +76,8 @@ class EmailController extends Controller
      */
     public function edit($id)
     {
-        $email = Cache::rememberForever('email.{$id}', function() use($id) {
-            return $email = Email::findOrFail($id);    
-       }); 
-
-       
-
+        $email = $this->email->findById($id);    
+    
        return view('emails.edit', compact('email'));
     }
 
@@ -94,10 +90,9 @@ class EmailController extends Controller
      */
     public function update(UpdateRequestEmail $request, $id)
     {
-            $email = Email::findOrFail($id);
-            $email->update($request->all());
-            Cache::flush();   
-        return back();
+       $this->email->update($id, $request); 
+       // return back();
+       return redirect()->route('emails.index');  
     }
 
     /**
@@ -108,10 +103,7 @@ class EmailController extends Controller
      */
     public function destroy($id)
     {
-        $email = Email::findOrFail($id);
-        $email->delete();
-
-        Cache::flush();
+        $this->email->destroy($id);
 
       return redirect()->route('emails.index');  
     }

@@ -36,13 +36,13 @@
                                 <td>{{ $user->name }} </td>
                                 <td>{{ $user->email }} </td>
                                 <td>    
-                                    {{ $user->roles->pluck('display_name')->implode('- ')   }}
+                                    {{ $user->present()->roles() }}
                                 </td>
                                 <td>
-                                     {{  ($user->note->body) ?? 'no tiene nota'  }}
+                                     {{  $user->present()->notes()  }}
                                 </td>
                                 <td>
-                                    {{  ($user->tags->pluck('name')->implode(',')) ?? 'no tiene nota'  }}
+                                    {{  $user->present()->tags()  }}
                                </td>     
                                 <td> 
                                     <div class="btn-group btn-group-sm">

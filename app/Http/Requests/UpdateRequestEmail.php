@@ -23,11 +23,20 @@ class UpdateRequestEmail extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name'    => 'required',
-            'email'   => 'required|email',
-            'subject' => 'required',
-            'content' => 'required'
-        ];
+
+        if(auth()->check()){
+            return [
+                'subject' => 'required',
+                'content' => 'required'
+            ];
+            
+        }else{ 
+            return [
+                'name'    => 'required',
+                'email'   => 'required|email',
+                'subject' => 'required',
+                'content' => 'required'
+            ];
+        }
     }
 }

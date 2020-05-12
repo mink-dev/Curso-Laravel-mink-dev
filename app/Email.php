@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use App\Note;
 use App\User;
-
+use App\Presenters\EmailsPresenter;
 class Email extends Model
 {
 
@@ -26,4 +26,10 @@ class Email extends Model
     public function tags(){
         return $this->morphToMany(Tag::class, 'taggable');
     }
+
+    public function present(){
+        return new EmailsPresenter($this);
+    }
+
+
 }

@@ -5,51 +5,25 @@ namespace App\Http\Controllers;
 use App\Providers\MessageWasReceived;
 use App\Email;
 use App\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Repositories\Emails;
+use App\Repositories\CacheEmails;
 
 
 class MessageController extends Controller
 {
     
 
-    public function store(Request $request){
+    public function store(Request $request, CacheEmails $email){
 
-        if(auth()->check()){
-      
-                $msg = request()->validate([
-                            'subject'=> 'required',
-                            'content' => 'required|min:3'
-                       ],
-                       [
-                            'name.required' => __('I need your name')
-                       ]
-                );
-    
-        }else{
+        $msg = $email->store($request);
 
-            $msg = request()->validate([
-                    'name' => 'required',
-                    'email' => ['required', 'email'],
-                    'subject'=> 'required',
-                    'content' => 'required|min:3'
-                ],[
-                    'name.required' => __('I need your name')
-                    
-                ]
-            );
-        }
-
-         Cache::flush();   
+        //evento para enviar email
         //event(new MessageWasReceived($msg));
-        
-        
-        $email = Email::create($request->all());
-        
-        if(auth()->check()){
-           auth()->user()->emails()->save($email);
-        }
+     
        
         // $this->saveEmail();
         

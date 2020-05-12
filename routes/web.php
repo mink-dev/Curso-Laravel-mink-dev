@@ -2,7 +2,6 @@
 
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,9 +41,9 @@
 
 
 //Codigo para imprimier querys en vista asi como su tiempo
-DB::listen(function($query){
-echo  "<pre>{$query->sql}</pre>";
-});
+// DB::listen(function($query){
+// echo  "<pre>{$query->sql}</pre>";
+// });
 
 
 

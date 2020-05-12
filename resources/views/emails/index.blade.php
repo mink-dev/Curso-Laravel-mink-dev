@@ -26,18 +26,15 @@
                 <tbody>
                     @foreach ($emails as $email)
                         <tr> 
-                            <td>{{  $email->id }} </td>
+                            <td>{{ $email->id }} </td>
                             
-                            @if($email->user_id)
-                                <td><a href="{{ route('users.show', $email->user_id)}}">{{ $email->user->name }}</td>
-                                <td> {{ $email->user->email}} </td>
-                            @else
-                                <td>{{ $email->name }} </td>
-                                <td>{{ $email->email }} </td> 
-                           @endif    
+                            <td>{{ $email->present()->userName()  }}</td>
+                            <td>{{ $email->present()->userEmail() }} </td>  
+
+
                             <td>{{ $email->subject }}</td>
                             <td>{{ $email->content }}</td>
-                            <td>{{   ($email->note->body) ?? 'no tiene nota' }}</td>
+                            <td>{{ $email->present()->notes()  }}</td>
                             <td> 
                                 <div class="btn-group btn-group-sm">
                                     <a class="btn btn-primary text-white" href="{{ route('emails.edit', $email->id ) }}">Editar</a>
@@ -52,6 +49,7 @@
                             
                         </tr>
                     @endforeach
+
                     {!! $emails->fragment('hash
                     ')->appends(request()->query())->links('pagination::bootstrap-4')!!}
                 </tbody>    
