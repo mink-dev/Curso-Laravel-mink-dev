@@ -19,16 +19,16 @@ class MessageController extends Controller
 
     public function store(Request $request, CacheEmails $email){
 
-        $msg = $email->store($request);
+    $msg = $email->store($request);
 
         //evento para enviar email
-        //event(new MessageWasReceived($msg));
+        event(new MessageWasReceived($msg));
      
        
         // $this->saveEmail();
         
-        // return new MessageReceived($msg); //linea para verifica cuerpo y forma del correo enviado
-        return back()->with('status','Recibimos tu mensaje, te responderemos en menos de 24 hrs.');
+       //  return new MessageWasReceived($msg); //linea para verifica cuerpo y forma del correo enviado
+       return back()->with('status','Recibimos tu mensaje, te responderemos en menos de 24 hrs.');
         
     }
 

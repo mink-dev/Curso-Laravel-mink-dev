@@ -70,7 +70,7 @@
                         @enderror
                        
                     </div>    
-                        <button class="btn btn-primary text-white btn-lg btn-block">{{ __('Send') }}</button>
+                        <button id="btn-contact-send" class="btn btn-primary text-white btn-lg btn-block">{{ __('Send') }}</button>
                         
                 </form>
 

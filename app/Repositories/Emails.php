@@ -40,9 +40,9 @@ class Emails implements EmailsInterface
                 );
             }
             
-            $email = Email::create($request->all());
-            
-            if(auth()->check()){
+          $email = Email::create($request->all());
+        
+          if(auth()->check()){
             auth()->user()->emails()->save($email);
             }
 

@@ -8,7 +8,12 @@
 </head>
 <body>
     <p><strong>Recibiste un mensaje de: </strong>
-     {{  (auth()->check()) ? auth()->user()->name : $msg['name'] }} - {{  (auth()->check()) ? auth()->user()->email :  $msg['email'] }}</p>    
+     {{  (auth()->check()) ? auth()->user()->name : $msg['name'] }} - {{  (auth()->check()) ? auth()->user()->email :  $msg['email'] }}
+     
+    </p>    
+    
+    
+    
     <p><strong>Asunto: </strong>{{ $msg['subject'] }}</p>
     <p><strong>Contenido: </strong>{{ $msg['content'] }}</p>
 </body>

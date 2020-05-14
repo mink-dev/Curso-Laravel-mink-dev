@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MessageReceived;
 
-class SendAutoresponder
+class SendAutoresponder implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -26,7 +26,8 @@ class SendAutoresponder
     public function handle(MessageWasReceived $event)
     {
         $msg = $event->message;
-        Mail::to('sergiofr1989@hotmail.com')->queue(new MessageReceived($msg));
+       
+          Mail::to('sergiofr1989@hotmail.com')->send(new MessageReceived($msg));
             
     }
 }

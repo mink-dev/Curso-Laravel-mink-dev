@@ -45,7 +45,12 @@
 // echo  "<pre>{$query->sql}</pre>";
 // });
 
+//Ruta para ejecutar un job 
 
+// Route::get('job',  function(){
+//   dispatch(new App\Jobs\SendEmail);
+//   return "Listo";
+// });
 
 Route::get('roles', function () {
     return \App\Role::with('user')->get();
