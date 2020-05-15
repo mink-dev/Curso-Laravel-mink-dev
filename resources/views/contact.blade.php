@@ -69,9 +69,8 @@
                             </span>
                         @enderror
                        
-                    </div>    
-                        <button id="btn-contact-send" class="btn btn-primary text-white btn-lg btn-block">{{ __('Send') }}</button>
-                        
+                    </div> 
+                      <input type="submit" class="btn btn-primary text-white btn-lg btn-block" value="{{ __('Send') }}">
                 </form>
 
             {{-- {{ $errors }} <!--variable que contiene los errores  de formulario--> --}}

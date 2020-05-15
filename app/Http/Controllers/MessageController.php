@@ -23,8 +23,7 @@ class MessageController extends Controller
 
         //evento para enviar email
         event(new MessageWasReceived($msg));
-     
-       
+   
         // $this->saveEmail();
         
        //  return new MessageWasReceived($msg); //linea para verifica cuerpo y forma del correo enviado

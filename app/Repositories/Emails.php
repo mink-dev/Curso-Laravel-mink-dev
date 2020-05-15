@@ -47,7 +47,7 @@ class Emails implements EmailsInterface
             }
 
            
-            
+            echo "store Emails";
             return $email;
         
     }

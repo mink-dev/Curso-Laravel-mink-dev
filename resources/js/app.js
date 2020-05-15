@@ -1,11 +1,12 @@
 require('./bootstrap');
 
-$('#btn-contact-send').click( function(){
-    $('#btn-contact-send').attr('disabled', true);
+$('form').on('submit', function(){
+    $(this).find('input[type=submit]').attr('disabled', true);
 })
 
-// $("#btn-contact-send").clic(function(){
-//     alert('hola');
-// })
+Echo.channel()
+    .listen('MessageWasReceived', (data) => {
+        console.log(data);
+    })
 
 

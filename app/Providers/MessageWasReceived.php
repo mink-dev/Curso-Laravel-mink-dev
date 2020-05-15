@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 
-class MessageWasReceived
+class MessageWasReceived implements ShouldBroadcast //indicamos que laravel emitira este evento por un canal pusher o redis
 {
     public $message;
     use Dispatchable, InteractsWithSockets, SerializesModels;
@@ -33,7 +33,14 @@ class MessageWasReceived
      * @return \Illuminate\Broadcasting\Channel|array
      */
     public function broadcastOn()
-    {
-        return new PrivateChannel('channel-name');
+    {   
+        //un canal puede tener varios eventos y este puedes ser privado o publico 
+        //canal private
+        //return new PrivateChannel('channel-name'); //
+    
+        //canal publico 
+        return new Channel('emails-name'); //
+    
+    
     }
 }

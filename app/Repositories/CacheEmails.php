@@ -27,6 +27,7 @@ use App\Repositories\EmailsInterface;
     public function store($request){
         $email = $this->emails->store($request);
         Cache::tags('emails')->flush();
+        echo "store CacheEmails";
         return $email; 
 
     }

@@ -16,12 +16,15 @@
         "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^5.1",
         "jquery": "^3.5.1",
+        "laravel-echo": "^1.7.0",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.13",
         "popper.js": "^1.16.1",
+        "pusher-js": "^6.0.3",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.20.1",
         "sass-loader": "7.*",
+        "socket.io-client": "^2.3.0",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
     }
