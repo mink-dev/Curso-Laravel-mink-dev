@@ -48631,7 +48631,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 $('form').on('submit', function () {
   $(this).find('input[type=submit]').attr('disabled', true);
 });
-Echo.channel().listen('MessageWasReceived', function (data) {
+Echo.channel('emails-name').listen('MessageWasReceived', function (data) {
+  alert('llegamos');
   console.log(data);
 });
 
